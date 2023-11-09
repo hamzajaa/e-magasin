@@ -11,18 +11,17 @@ public class Paiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long paiementId;
-    private long commandeId;
+    private Commande commande;
     private double montant;
     private  EtatPaiement etatPaiement;
     private String methodDePaiement;
 
-
     public Paiement() {
     }
 
-    public Paiement(long paiementId, long commandeId, double montant, EtatPaiement etatPaiement, String methodDePaiement) {
+    public Paiement(long paiementId, Commande commande, double montant, EtatPaiement etatPaiement, String methodDePaiement) {
         this.paiementId = paiementId;
-        this.commandeId = commandeId;
+        this.commande = commande;
         this.montant = montant;
         this.etatPaiement = etatPaiement;
         this.methodDePaiement = methodDePaiement;
@@ -36,12 +35,12 @@ public class Paiement {
         this.paiementId = paiementId;
     }
 
-    public long getCommandeId() {
-        return commandeId;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setCommandeId(long commandeId) {
-        this.commandeId = commandeId;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public double getMontant() {
@@ -52,19 +51,19 @@ public class Paiement {
         this.montant = montant;
     }
 
-    public String getMethodDePaiement() {
-        return methodDePaiement;
-    }
-
-    public void setMethodDePaiement(String methodDePaiement) {
-        this.methodDePaiement = methodDePaiement;
-    }
-
     public EtatPaiement getEtatPaiement() {
         return etatPaiement;
     }
 
     public void setEtatPaiement(EtatPaiement etatPaiement) {
         this.etatPaiement = etatPaiement;
+    }
+
+    public String getMethodDePaiement() {
+        return methodDePaiement;
+    }
+
+    public void setMethodDePaiement(String methodDePaiement) {
+        this.methodDePaiement = methodDePaiement;
     }
 }
