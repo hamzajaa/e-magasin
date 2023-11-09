@@ -1,31 +1,22 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 
 @Entity
-
 public class CommandItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private int command_id;
-    private int product_id;
+    @ManyToOne
+    @JoinColumn(name = "commande_id")
+    private Commande commande;
+    private int productId;
     private int quantity;
-    private double subtotal;
+    private BigDecimal prix;
 
     public CommandItem() {
-    }
-
-    public CommandItem(Long id, int command_id, int product_id, int quantity, double subtotal) {
-        this.id = id;
-        this.command_id = command_id;
-        this.product_id = product_id;
-        this.quantity = quantity;
-        this.subtotal = subtotal;
     }
 
     public Long getId() {
@@ -36,20 +27,20 @@ public class CommandItem {
         this.id = id;
     }
 
-    public int getCommand_id() {
-        return command_id;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setCommand_id(int command_id) {
-        this.command_id = command_id;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public int getProduct_id() {
-        return product_id;
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProduct_id(int productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {
@@ -60,11 +51,11 @@ public class CommandItem {
         this.quantity = quantity;
     }
 
-    public double getSubtotal() {
-        return subtotal;
+    public BigDecimal getPrix() {
+        return prix;
     }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public void setPrix(BigDecimal prix) {
+        this.prix = prix;
     }
 }
