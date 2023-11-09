@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class paiement {
+public class Paiement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,10 +17,10 @@ public class paiement {
     private String methodDePaiement;
 
 
-    public paiement() {
+    public Paiement() {
     }
 
-    public paiement(long paiementId, long commandeId, double montant, EtatPaiement etatPaiement, String methodDePaiement) {
+    public Paiement(long paiementId, long commandeId, double montant, EtatPaiement etatPaiement, String methodDePaiement) {
         this.paiementId = paiementId;
         this.commandeId = commandeId;
         this.montant = montant;
