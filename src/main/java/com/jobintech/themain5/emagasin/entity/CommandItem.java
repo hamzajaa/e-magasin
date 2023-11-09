@@ -12,7 +12,7 @@ public class CommandItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int command_id;
+    private Commande commande;
     private int product_id;
     private int quantity;
     private double subtotal;
@@ -20,9 +20,9 @@ public class CommandItem {
     public CommandItem() {
     }
 
-    public CommandItem(Long id, int command_id, int product_id, int quantity, double subtotal) {
+    public CommandItem(Long id, Commande commande, int product_id, int quantity, double subtotal) {
         this.id = id;
-        this.command_id = command_id;
+        this.commande = commande;
         this.product_id = product_id;
         this.quantity = quantity;
         this.subtotal = subtotal;
@@ -36,12 +36,12 @@ public class CommandItem {
         this.id = id;
     }
 
-    public int getCommand_id() {
-        return command_id;
+    public Commande getCommande() {
+        return commande;
     }
 
-    public void setCommand_id(int command_id) {
-        this.command_id = command_id;
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public int getProduct_id() {
