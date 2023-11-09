@@ -1,9 +1,6 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -20,6 +17,8 @@ public class Commande {
     private BigDecimal totalPaye;
     @CreationTimestamp
     private LocalDateTime dateCommande;
+    @OneToMany(mappedBy = "commande")
+    private List<Paiement> paiements;
 
     public Commande() {
     }
@@ -56,4 +55,11 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
+    public List<Paiement> getPaiements() {
+        return paiements;
+    }
+
+    public void setPaiements(List<Paiement> paiements) {
+        this.paiements = paiements;
+    }
 }
