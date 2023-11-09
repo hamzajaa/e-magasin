@@ -1,9 +1,6 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Paiement {
@@ -11,10 +8,17 @@ public class Paiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long paiementId;
+
+    @OneToOne
+    @JoinColumn(name = "commande_id")
     private Commande commande;
     private double montant;
+    @ManyToOne
+    @JoinColumn(name = "etatPaiement_id")
     private  EtatPaiement etatPaiement;
     private String methodDePaiement;
+
+
 
     public Paiement() {
     }
