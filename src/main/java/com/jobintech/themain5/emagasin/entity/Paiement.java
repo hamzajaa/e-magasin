@@ -13,8 +13,12 @@ public class Paiement {
     @JoinColumn(name = "commande_id")
     private Commande commande;
     private double montant;
+    @ManyToOne
+    @JoinColumn(name = "etatPaiement_id")
     private  EtatPaiement etatPaiement;
     private String methodDePaiement;
+
+
 
     public Paiement() {
     }
