@@ -8,11 +8,10 @@ public class Paiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long paiementId;
-
     @OneToOne
-    @JoinColumn(name = "commande_id")
     private Commande commande;
     private double montant;
+    @ManyToOne
     private  EtatPaiement etatPaiement;
     private String methodDePaiement;
 
