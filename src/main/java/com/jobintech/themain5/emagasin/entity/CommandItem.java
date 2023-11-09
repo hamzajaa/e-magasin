@@ -1,9 +1,8 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 
 @Entity
 
@@ -11,21 +10,15 @@ public class CommandItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "commande_id")
     private Commande commande;
-    private int product_id;
+    private int productId;
     private int quantity;
-    private double subtotal;
+    private BigDecimal prix;
 
     public CommandItem() {
-    }
-
-    public CommandItem(Long id, Commande commande, int product_id, int quantity, double subtotal) {
-        this.id = id;
-        this.commande = commande;
-        this.product_id = product_id;
-        this.quantity = quantity;
-        this.subtotal = subtotal;
     }
 
     public Long getId() {
@@ -45,11 +38,11 @@ public class CommandItem {
     }
 
     public int getProduct_id() {
-        return product_id;
+        return productId;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public void setProduct_id(int productId) {
+        this.productId = productId;
     }
 
     public int getQuantity() {
@@ -60,11 +53,11 @@ public class CommandItem {
         this.quantity = quantity;
     }
 
-    public double getSubtotal() {
-        return subtotal;
+    public BigDecimal getPrix() {
+        return prix;
     }
 
-    public void setSubtotal(double subtotal) {
-        this.subtotal = subtotal;
+    public void setPrix(BigDecimal prix) {
+        this.prix = prix;
     }
 }
