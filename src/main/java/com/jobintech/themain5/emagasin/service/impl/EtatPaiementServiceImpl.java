@@ -46,7 +46,11 @@ public class EtatPaiementServiceImpl implements EtatPaiementService {
 
     @Override
     public int delete(Long id) {
-        etatPaimentDao.deleteById(id);
-        return 1;
+        Optional<EtatPaiement> etatPaiementExist = etatPaimentDao.findById(id);
+        if( etatPaiementExist.isPresent()){
+            etatPaimentDao.delete(etatPaiementExist.get());
+            return 1;
+
+        }else return 0;
     }
 }
