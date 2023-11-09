@@ -56,7 +56,13 @@ public class CommandeItemServiceImpl implements CommandeItemService {
 
 
     @Override
-    public int delete() {
-        return 0;
+    public int delete(Long id) {
+        try{
+            commandeItemDao.deleteById(id);
+            return 1;
+        }catch (Exception e){
+            return 0;
+        }
+
     }
 }

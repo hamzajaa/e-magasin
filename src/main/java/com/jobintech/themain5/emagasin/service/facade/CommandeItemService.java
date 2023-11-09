@@ -1,6 +1,6 @@
 package com.jobintech.themain5.emagasin.service.facade;
 
-import com.jobintech.themain5.emagasin.entity.Commande;
+
 import com.jobintech.themain5.emagasin.entity.CommandeItem;
 
 import java.util.List;
@@ -11,6 +11,6 @@ public interface CommandeItemService {
     Optional<CommandeItem> findById(Long id);
     CommandeItem save(CommandeItem commandeItem);
     CommandeItem update(CommandeItem commandeItem,Long id);
-    int delete();
+    int delete(Long id);
 
 }
