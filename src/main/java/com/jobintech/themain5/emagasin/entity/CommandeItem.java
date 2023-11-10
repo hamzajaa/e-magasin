@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-public class CommandItem {
+public class CommandeItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,7 +16,7 @@ public class CommandItem {
     private int quantity;
     private BigDecimal prix;
 
-    public CommandItem() {
+    public CommandeItem() {
     }
 
     public Long getId() {
