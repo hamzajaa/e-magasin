@@ -1,5 +1,8 @@
 package com.jobintech.themain5.emagasin.converter;
 
+import com.jobintech.themain5.emagasin.dto.CommandeItemDto;
+import com.jobintech.themain5.emagasin.entity.CommandeItem;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,6 +10,8 @@ import java.util.List;
 public abstract class AbstractConverter<E, D> {
 
     abstract E toEntity(D dto);
+
+    abstract CommandeItem toEntity(CommandeItemDto dto);
 
     abstract D toDto(E entity);
 
