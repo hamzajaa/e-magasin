@@ -12,7 +12,7 @@ public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> 
     }
 
     @Override
-    Commande toEntity(CommandeDto dto) {
+    public Commande toEntity(CommandeDto dto) {
         if (dto == null) {
             return null;
         } else {
@@ -27,7 +27,7 @@ public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> 
     }
 
     @Override
-    CommandeDto toDto(Commande entity) {
+   public CommandeDto toDto(Commande entity) {
         if (entity == null) {
             return null;
         } else {
