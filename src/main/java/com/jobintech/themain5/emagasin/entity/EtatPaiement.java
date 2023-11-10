@@ -1,11 +1,9 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "etat-paiements")
 public class EtatPaiement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
