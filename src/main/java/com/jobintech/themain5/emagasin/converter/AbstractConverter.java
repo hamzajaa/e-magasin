@@ -11,28 +11,28 @@ public abstract class AbstractConverter<E, D> {
     abstract D toDto(E entity);
 
     public List<E> toEntity(List<D> dtos) {
-        if (dtos != null || !dtos.isEmpty()) {
+        if (dtos == null || dtos.isEmpty()) {
+            return Collections.emptyList();
+        } else {
             List<E> entities = new ArrayList<>();
             for (D dto : dtos) {
                 E entity = toEntity(dto);
                 entities.add(entity);
             }
             return entities;
-        } else {
-            return Collections.emptyList();
         }
     }
 
     public List<D> toDto(List<E> entities) {
-        if ( entities != null || !entities.isEmpty() ) {
+        if (entities == null || entities.isEmpty()) {
+            return Collections.emptyList();
+        } else {
             List<D> dtos = new ArrayList<>();
             for (E entity : entities) {
                 D dto = toDto(entity);
                 dtos.add(dto);
             }
             return dtos;
-        } else {
-            return Collections.emptyList();
         }
     }
 
