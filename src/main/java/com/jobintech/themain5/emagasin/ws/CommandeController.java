@@ -1,10 +1,10 @@
 package com.jobintech.themain5.emagasin.ws;
 
+import com.jobintech.themain5.emagasin.converter.CommandeConverter;
+import com.jobintech.themain5.emagasin.dto.CommandeDto;
 import com.jobintech.themain5.emagasin.entity.Commande;
 import com.jobintech.themain5.emagasin.service.facade.CommandeService;
-import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,28 +16,35 @@ import java.util.Optional;
 public class CommandeController {
 
     private CommandeService commandeService;
-    public CommandeController(CommandeService commandeService) {
+    private CommandeConverter commandeConverter;
+
+    public CommandeController(CommandeService commandeService, CommandeConverter commandeConverter) {
         this.commandeService = commandeService;
+        this.commandeConverter = commandeConverter;
     }
 
     @GetMapping("/")
-    public List<Commande> findAll() {
-        return commandeService.findAll();
+    public List<CommandeDto> findAll() {
+        return commandeConverter.toDto(commandeService.findAll());
     }
 
     @GetMapping("/id/{id}")
-    public Optional<Commande> findById(@PathVariable Long id) {
-        return commandeService.findById(id);
+    public CommandeDto findById(@PathVariable Long id) {
+        return commandeConverter.toDto(commandeService.findById(id).get());
     }
 
     @PostMapping("/")
-    public Commande save(@RequestBody Commande commande) {
-        return commandeService.save(commande);
+    public CommandeDto save(@RequestBody CommandeDto commandeDto) {
+        Commande commande = commandeConverter.toEntity(commandeDto);
+        commande = commandeService.save(commande);
+        return commandeConverter.toDto(commande);
     }
 
     @PutMapping("/id/{id}")
-    public Commande update(@RequestBody Commande commande, @PathVariable Long id) {
-        return commandeService.update(commande, id);
+    public CommandeDto update(@RequestBody CommandeDto commandeDto, @PathVariable Long id) {
+        Commande commande = commandeConverter.toEntity(commandeDto);
+        commande = commandeService.update(commande, id);
+        return commandeConverter.toDto(commande);
     }
 
     @DeleteMapping("/id/{id}")
