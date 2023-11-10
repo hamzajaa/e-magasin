@@ -14,7 +14,7 @@ public class CommandeItemConverter extends AbstractConverter<CommandeItem, Comma
 
 
     @Override
-    CommandeItem toEntity(CommandeItemDto dto) {
+    public CommandeItem toEntity(CommandeItemDto dto) {
         if(dto == null){
             return null;
         }
@@ -30,7 +30,7 @@ public class CommandeItemConverter extends AbstractConverter<CommandeItem, Comma
     }
 
     @Override
-    CommandeItemDto toDto(CommandeItem entity) {
+    public CommandeItemDto toDto(CommandeItem entity) {
         if(entity == null){
             return null;
         }else{

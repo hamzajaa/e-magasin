@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> {
 
     @Autowired
-    private CommandeItemConverter commandeItemConverter;
+    private  CommandeItemConverter commandeItemConverter;
 
 
     @Override
