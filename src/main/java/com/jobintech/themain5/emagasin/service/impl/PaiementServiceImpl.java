@@ -47,7 +47,7 @@ public class PaiementServiceImpl implements PaiementService {
     }
 
     @Override
-    public int deletePaiement(Long id) {
+    public int deletePaiementById(Long id) {
 
         Optional<Paiement> paiementExist = paiementDao.findById(id);
 
@@ -58,4 +58,6 @@ public class PaiementServiceImpl implements PaiementService {
         }else
             return 0;
     }
+
+
 }

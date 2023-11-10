@@ -15,7 +15,7 @@ public interface PaiementService {
 
     Paiement updatePaiement(Paiement paiement, Long id);
 
-    int deletePaiement(Long id);
+    int deletePaiementById(Long id);
 
 
 
