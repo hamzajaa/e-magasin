@@ -18,7 +18,7 @@ public class Commande {
     @CreationTimestamp
     private LocalDateTime dateCommande;
     @OneToMany(mappedBy = "commande", fetch = FetchType.LAZY)
-    private List<CommandItem> commandItems;
+    private List<CommandeItem> commandItems;
 
     public Commande() {
     }
@@ -47,11 +47,11 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public List<CommandItem> getCommandItems() {
+    public List<CommandeItem> getCommandeItems() {
         return commandItems;
     }
 
-    public void setCommandItems(List<CommandItem> commandItems) {
+    public void setCommandeItems(List<CommandeItem> commandItems) {
         this.commandItems = commandItems;
     }
 }
