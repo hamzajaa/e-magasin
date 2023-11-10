@@ -11,7 +11,6 @@ public abstract class AbstractConverter<E, D> {
 
     abstract E toEntity(D dto);
 
-    abstract CommandeItem toEntity(CommandeItemDto dto);
 
     abstract D toDto(E entity);
 
