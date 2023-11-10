@@ -9,12 +9,14 @@ public class CommandeItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private int quantity;
+    private BigDecimal prix;
     @ManyToOne
     @JoinColumn(name = "commande_id")
     private Commande commande;
-    private int productId;
-    private int quantity;
-    private BigDecimal prix;
+    private Long productId;
+
 
     public CommandeItem() {
     }
@@ -35,11 +37,11 @@ public class CommandeItem {
         this.commande = commande;
     }
 
-    public int getProduct_id() {
+    public Long getProduct_id() {
         return productId;
     }
 
-    public void setProduct_id(int productId) {
+    public void setProduct_id(Long productId) {
         this.productId = productId;
     }
 
