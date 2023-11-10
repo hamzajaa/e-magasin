@@ -11,14 +11,10 @@ public interface CommandeService {
 
     Optional<Commande> findById(Long id);
 
-    Optional<Commande> findByReference(String reference);
-
     Commande save(Commande commande);
 
     Commande update(Commande commande,Long id);
 
     int delete(Long id);
-
-    int deleteByReference(String reference);
 
 }

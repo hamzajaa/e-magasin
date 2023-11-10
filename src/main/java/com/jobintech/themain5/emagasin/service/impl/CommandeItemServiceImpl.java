@@ -38,10 +38,10 @@ public class CommandeItemServiceImpl implements CommandeItemService {
 
     @Override
     public CommandeItem update(CommandeItem updatedCommandeItem, Long id) {
-        Optional<CommandeItem> existingCommandItem = commandeItemDao.findById(id);
+        Optional<CommandeItem> existingCommandeItem = commandeItemDao.findById(id);
 
-        if (existingCommandItem.isPresent()) {
-            CommandeItem commandeItem = existingCommandItem.get();
+        if (existingCommandeItem.isPresent()) {
+            CommandeItem commandeItem = existingCommandeItem.get();
             Optional<Commande> existingCommande = commandeService.findById(updatedCommandeItem.getCommande().getId());
             if (existingCommande.isPresent()) {
                 Commande commande = existingCommande.get();
