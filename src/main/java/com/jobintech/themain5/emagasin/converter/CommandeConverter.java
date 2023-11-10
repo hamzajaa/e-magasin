@@ -19,6 +19,7 @@ public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> 
         } else {
             Commande commande = new Commande();
             commande.setId(dto.id());
+            commande.setReference(dto.reference());
             commande.setTotalPaye(dto.totalPaye());
             commande.setDateCommande(dto.dateCommande());
             commande.setCommandeItems(commandeItemConverter.toEntity(dto.commandeItemDtos()));
@@ -34,6 +35,7 @@ public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> 
         } else {
             CommandeDto commandeDto = new CommandeDto(
                     entity.getId(),
+                    entity.getReference(),
                     entity.getTotalPaye(),
                     entity.getDateCommande(),
                     commandeItemConverter.toDto(entity.getCommandeItems())

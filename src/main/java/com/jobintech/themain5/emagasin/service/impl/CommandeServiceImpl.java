@@ -37,10 +37,15 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
+    public Commande findByReference(String reference) {
+        return commandeDao.findByReference(reference).get();
+    }
+
+    @Override
     public Commande save(Commande commande) {
         assert commande != null;
         Commande result = null;
-        Optional<Commande> foundedCommande = findById(commande.getId());
+        Optional<Commande> foundedCommande = commandeDao.findByReference(commande.getReference());
         if (foundedCommande.isEmpty()) {
             Commande savedCommande = commandeDao.save(commande);
             saveCommandeItems(savedCommande, commande.getCommandeItems());

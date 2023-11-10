@@ -10,6 +10,7 @@ public interface CommandeService {
     List<Commande> findAll();
 
     Optional<Commande> findById(Long id);
+    Commande findByReference(String reference);
 
     Commande save(Commande commande);
 

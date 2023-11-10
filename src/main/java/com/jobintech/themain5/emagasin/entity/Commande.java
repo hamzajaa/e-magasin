@@ -14,6 +14,7 @@ public class Commande {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String reference;
     private BigDecimal totalPaye;
     @CreationTimestamp
     private LocalDateTime dateCommande;
@@ -53,5 +54,13 @@ public class Commande {
 
     public void setCommandeItems(List<CommandeItem> commandItems) {
         this.commandItems = commandItems;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 }
