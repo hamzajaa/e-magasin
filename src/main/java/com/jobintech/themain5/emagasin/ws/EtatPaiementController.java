@@ -17,7 +17,6 @@ public class EtatPaiementController {
 
     private final EtatPaiementService etatPaiementService;
 
-    @Autowired
     public EtatPaiementController(EtatPaiementService etatPaiementService) {
         this.etatPaiementService = etatPaiementService;
     }
