@@ -1,9 +1,6 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
@@ -11,15 +8,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "commandes")
 public class Commande {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String reference;
     private BigDecimal totalPaye;
     @CreationTimestamp
     private LocalDateTime dateCommande;
+    @OneToMany(mappedBy = "commande", fetch = FetchType.LAZY)
+    private List<CommandItem> commandItems;
 
     public Commande() {
     }
@@ -30,14 +29,6 @@ public class Commande {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getReference() {
-        return reference;
-    }
-
-    public void setReference(String reference) {
-        this.reference = reference;
     }
 
     public BigDecimal getTotalPaye() {
@@ -56,4 +47,11 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
+    public List<CommandItem> getCommandItems() {
+        return commandItems;
+    }
+
+    public void setCommandItems(List<CommandItem> commandItems) {
+        this.commandItems = commandItems;
+    }
 }
