@@ -1,22 +1,18 @@
 package com.jobintech.themain5.emagasin.entity;
 
-import jakarta.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "clients")
+
 public class Client {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id")
+
     private Long clientId;
 
-    @Column(name = "client_name")
+
     private String clientName;
 
     // One-to-Many relationship with Commande
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL)
+
     private List<Commande> commandes;
 
 
