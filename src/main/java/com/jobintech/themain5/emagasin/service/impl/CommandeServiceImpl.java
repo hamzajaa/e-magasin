@@ -1,7 +1,7 @@
 package com.jobintech.themain5.emagasin.service.impl;
 
 import com.jobintech.themain5.emagasin.dao.CommandeDao;
-import com.jobintech.themain5.emagasin.entity.CommandItem;
+import com.jobintech.themain5.emagasin.entity.CommandeItem;
 import com.jobintech.themain5.emagasin.entity.Commande;
 import com.jobintech.themain5.emagasin.service.facade.CommandeService;
 import jakarta.persistence.EntityNotFoundException;
@@ -38,21 +38,21 @@ public class CommandeServiceImpl implements CommandeService {
         Optional<Commande> foundedCommande = findById(commande.getId());
         if (foundedCommande.isEmpty()) {
             Commande savedCommande = commandeDao.save(commande);
-            saveCommandeItems(savedCommande, commande.getCommandItems());
+            saveCommandeItems(savedCommande, commande.getCommandeItems());
             result = savedCommande;
         }
         return result;
     }
 
-    private void saveCommandeItems(Commande commande, List<CommandItem> commandItems) {
+    private void saveCommandeItems(Commande commande, List<CommandeItem> commandItems) {
         if (!commandItems.isEmpty()) {
-            List<CommandItem> savedCommandeItems = new ArrayList<>();
+            List<CommandeItem> savedCommandeItems = new ArrayList<>();
             commandItems.forEach(commandItem -> {
                 commandItem.setCommande(commande);
                 // commandeItemService.save(commandeItem)
                 savedCommandeItems.add(commandItem);
             });
-            commande.setCommandItems(commandItems);
+            commande.setCommandeItems(commandItems);
         }
     }
 
@@ -71,13 +71,13 @@ public class CommandeServiceImpl implements CommandeService {
 //    private void updateAssociatedList(Commande commande, Long id) {
 //        if (commande != null || id != null) {
 //            assert commande != null;
-//            List<CommandItem> newList = commande.getCommandItems();
-//            List<CommandItem> oldList = commandeItemService.findByCommandeId(id);
+//            List<CommandeItem> newList = commande.getCommandeItems();
+//            List<CommandeItem> oldList = commandeItemService.findByCommandeId(id);
 //
-//            List<CommandItem> resultDelete = new ArrayList<>();
-//            List<CommandItem> resultUpdate = new ArrayList<>();
+//            List<CommandeItem> resultDelete = new ArrayList<>();
+//            List<CommandeItem> resultUpdate = new ArrayList<>();
 //
-//            List<List<CommandItem>> result = new ArrayList<>();
+//            List<List<CommandeItem>> result = new ArrayList<>();
 //
 //            boolean oldEmpty = oldList.isEmpty();
 //            boolean newEmpty = newList.isEmpty();
@@ -88,8 +88,8 @@ public class CommandeServiceImpl implements CommandeService {
 //                resultDelete.addAll(oldList);
 //            } else if (!newEmpty && !oldEmpty) {
 //
-//                for (CommandItem oldItem : oldList) {
-//                    CommandItem commandItem = newList.stream().filter(oldItem::equals).findFirst().orElse(null);
+//                for (CommandeItem oldItem : oldList) {
+//                    CommandeItem commandItem = newList.stream().filter(oldItem::equals).findFirst().orElse(null);
 //                    if (commandItem != null) {
 //                        resultUpdate.add(commandItem);
 //                    } else {
@@ -98,8 +98,8 @@ public class CommandeServiceImpl implements CommandeService {
 //
 //                }
 //
-//                for (CommandItem newItem : newList) {
-//                    CommandItem commandItem1 = oldList.stream().filter(newItem::equals).findFirst().orElse(null);
+//                for (CommandeItem newItem : newList) {
+//                    CommandeItem commandItem1 = oldList.stream().filter(newItem::equals).findFirst().orElse(null);
 //                    if (commandItem1 == null) {
 //                        resultUpdate.add(newItem);
 //                    }
