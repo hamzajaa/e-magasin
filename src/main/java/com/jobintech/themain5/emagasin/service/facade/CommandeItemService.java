@@ -12,5 +12,7 @@ public interface CommandeItemService {
     CommandeItem save(CommandeItem commandeItem);
     CommandeItem update(CommandeItem commandeItem,Long id);
     int delete(Long id);
+    List<CommandeItem> findByCommandeId(Long id);
+
 
 }
