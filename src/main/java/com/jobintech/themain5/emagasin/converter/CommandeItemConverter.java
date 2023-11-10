@@ -5,7 +5,7 @@ import com.jobintech.themain5.emagasin.dto.CommandeItemDto;
 import com.jobintech.themain5.emagasin.entity.CommandeItem;
 
 public class CommandeItemConverter extends AbstractConverter<CommandeItem, CommandeItemDto>{
-    private CommandeConverter commandeConverter;
+    private final CommandeConverter commandeConverter;
 
     public CommandeItemConverter(CommandeConverter commandeConverter) {
         this.commandeConverter = commandeConverter;
@@ -35,7 +35,7 @@ public class CommandeItemConverter extends AbstractConverter<CommandeItem, Comma
         if(entity == null){
             return null;
         }else{
-            CommandeItemDto commandeItemDto = new CommandeItemDto(
+            return new CommandeItemDto(
                     entity.getId(),
                     commandeConverter.toDto(entity.getCommande()),
                     entity.getProduct_id(),
@@ -43,7 +43,6 @@ public class CommandeItemConverter extends AbstractConverter<CommandeItem, Comma
                     entity.getPrix()
 
             );
-            return commandeItemDto;
         }
     }
 

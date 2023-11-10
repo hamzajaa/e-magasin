@@ -31,17 +31,17 @@ public class PaiementConverter extends AbstractConverter<Paiement, PaiementDto>{
 
     @Override
     PaiementDto toDto(Paiement entity) {
-        if (entity == null)
-        return null;
+        if (entity == null) {
+            return null;
+        }
         {
-        PaiementDto paiementDto = new PaiementDto(
+            return new PaiementDto(
                 entity.getPaiementId(),
                 commandeConverter.toDto(entity.getCommande()),
                 entity.getMontant(),
                 etatPaiementConverter.toDto(entity.getEtatPaiement()),
                 entity.getMethodDePaiement()
         );
-        return paiementDto;
         }
     }
 }

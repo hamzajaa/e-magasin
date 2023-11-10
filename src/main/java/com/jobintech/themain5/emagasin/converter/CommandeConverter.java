@@ -1,7 +1,9 @@
 package com.jobintech.themain5.emagasin.converter;
 
 import com.jobintech.themain5.emagasin.dto.CommandeDto;
+import com.jobintech.themain5.emagasin.dto.CommandeItemDto;
 import com.jobintech.themain5.emagasin.entity.Commande;
+import com.jobintech.themain5.emagasin.entity.CommandeItem;
 
 public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> {
 
