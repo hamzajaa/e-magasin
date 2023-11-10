@@ -9,8 +9,5 @@ import java.util.Optional;
 @Repository
 public interface CommandeDao extends JpaRepository<Commande, Long> {
 
-    Optional<Commande> findByReference(String reference);
-
-    int deleteByReference(String reference);
 
 }

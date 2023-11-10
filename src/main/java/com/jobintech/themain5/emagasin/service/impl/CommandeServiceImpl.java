@@ -1,12 +1,15 @@
 package com.jobintech.themain5.emagasin.service.impl;
 
 import com.jobintech.themain5.emagasin.dao.CommandeDao;
+import com.jobintech.themain5.emagasin.entity.CommandItem;
 import com.jobintech.themain5.emagasin.entity.Commande;
 import com.jobintech.themain5.emagasin.service.facade.CommandeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -29,19 +32,28 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    public Optional<Commande> findByReference(String reference) {
-        return commandeDao.findByReference(reference);
-    }
-
-    @Override
     public Commande save(Commande commande) {
+        assert commande != null;
         Commande result = null;
-        if (commande == null) return null;
         Optional<Commande> foundedCommande = findById(commande.getId());
-        if (foundedCommande.isPresent()) {
-            result = commandeDao.save(commande);
+        if (foundedCommande.isEmpty()) {
+            Commande savedCommande = commandeDao.save(commande);
+            saveCommandeItems(savedCommande, commande.getCommandItems());
+            result = savedCommande;
         }
         return result;
+    }
+
+    private void saveCommandeItems(Commande commande, List<CommandItem> commandItems) {
+        if (!commandItems.isEmpty()) {
+            List<CommandItem> savedCommandeItems = new ArrayList<>();
+            commandItems.forEach(commandItem -> {
+                commandItem.setCommande(commande);
+                // commandeItemService.save(commandeItem)
+                savedCommandeItems.add(commandItem);
+            });
+            commande.setCommandItems(commandItems);
+        }
     }
 
     @Override
@@ -50,10 +62,60 @@ public class CommandeServiceImpl implements CommandeService {
         Optional<Commande> foundedCommande = findById(id);
         if (foundedCommande.isPresent()) {
             commande.setId(id);
+//            updateAssociatedList(commande, id);
             result = commandeDao.save(commande);
         }
         return result;
     }
+
+//    private void updateAssociatedList(Commande commande, Long id) {
+//        if (commande != null || id != null) {
+//            assert commande != null;
+//            List<CommandItem> newList = commande.getCommandItems();
+//            List<CommandItem> oldList = commandeItemService.findByCommandeId(id);
+//
+//            List<CommandItem> resultDelete = new ArrayList<>();
+//            List<CommandItem> resultUpdate = new ArrayList<>();
+//
+//            List<List<CommandItem>> result = new ArrayList<>();
+//
+//            boolean oldEmpty = oldList.isEmpty();
+//            boolean newEmpty = newList.isEmpty();
+//
+//            if (!newEmpty && oldEmpty) {
+//                resultUpdate.addAll(newList);
+//            } else if (newEmpty && !oldEmpty) {
+//                resultDelete.addAll(oldList);
+//            } else if (!newEmpty && !oldEmpty) {
+//
+//                for (CommandItem oldItem : oldList) {
+//                    CommandItem commandItem = newList.stream().filter(oldItem::equals).findFirst().orElse(null);
+//                    if (commandItem != null) {
+//                        resultUpdate.add(commandItem);
+//                    } else {
+//                        resultDelete.add(oldItem);
+//                    }
+//
+//                }
+//
+//                for (CommandItem newItem : newList) {
+//                    CommandItem commandItem1 = oldList.stream().filter(newItem::equals).findFirst().orElse(null);
+//                    if (commandItem1 == null) {
+//                        resultUpdate.add(newItem);
+//                    }
+//                }
+//
+//            }
+//
+//            result.add(resultUpdate);
+//            result.add(resultDelete);
+//
+//            commandeItemService.delete(result.get(1));
+//            result.get(0).forEach(commandItem -> commandItem.setCommande(commande));
+//            commandeItemService.update(result.get(0));
+//
+//        }
+//    }
 
     @Override
     public int delete(Long id) {
@@ -66,14 +128,4 @@ public class CommandeServiceImpl implements CommandeService {
         return res;
     }
 
-    @Override
-    public int deleteByReference(String reference) {
-        int res = 0;
-        Optional<Commande> foundedCommande = findByReference(reference);
-        if (foundedCommande.isPresent()) {
-            commandeDao.deleteByReference(reference);
-            res = 1;
-        }
-        return res;
-    }
 }
