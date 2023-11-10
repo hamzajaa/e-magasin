@@ -6,6 +6,7 @@ import com.jobintech.themain5.emagasin.entity.CommandeItem;
 import com.jobintech.themain5.emagasin.service.facade.CommandeItemService;
 import com.jobintech.themain5.emagasin.service.facade.CommandeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -64,5 +65,10 @@ public class CommandeItemServiceImpl implements CommandeItemService {
             return 0;
         }
 
+    }
+
+    @Override
+    public List<CommandeItem> findByCommandeId(Long id) {
+        return commandeItemDao.findByCommandeId(id);
     }
 }

@@ -2,7 +2,9 @@ package com.jobintech.themain5.emagasin.converter;
 
 import com.jobintech.themain5.emagasin.dto.PaiementDto;
 import com.jobintech.themain5.emagasin.entity.Paiement;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PaiementConverter extends AbstractConverter<Paiement, PaiementDto>{
 
     private final EtatPaiementConverter etatPaiementConverter;

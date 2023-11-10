@@ -3,15 +3,14 @@ package com.jobintech.themain5.emagasin.converter;
 import com.jobintech.themain5.emagasin.dto.CommandeDto;
 import com.jobintech.themain5.emagasin.dto.CommandeItemDto;
 import com.jobintech.themain5.emagasin.entity.CommandeItem;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class CommandeItemConverter extends AbstractConverter<CommandeItem, CommandeItemDto>{
-    private final CommandeConverter commandeConverter;
 
-    public CommandeItemConverter(CommandeConverter commandeConverter) {
-        this.commandeConverter = commandeConverter;
-    }
-
-
+    @Autowired
+    private  CommandeConverter commandeConverter;
 
 
     @Override
