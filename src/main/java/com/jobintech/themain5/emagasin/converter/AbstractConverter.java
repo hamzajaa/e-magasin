@@ -1,13 +1,17 @@
 package com.jobintech.themain5.emagasin.converter;
 
-import com.jobintech.themain5.emagasin.dto.CommandeItemDto;
-import com.jobintech.themain5.emagasin.entity.CommandeItem;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public abstract class AbstractConverter<E, D> {
+
+    @Autowired
+    private CommandeItemConverter commandeItemConverter;
+
+
 
     abstract E toEntity(D dto);
 
@@ -20,8 +24,7 @@ public abstract class AbstractConverter<E, D> {
         } else {
             List<E> entities = new ArrayList<>();
             for (D dto : dtos) {
-                E entity = toEntity(dto);
-                entities.add(entity);
+                entities.add(toEntity(dto));
             }
             return entities;
         }
@@ -33,8 +36,7 @@ public abstract class AbstractConverter<E, D> {
         } else {
             List<D> dtos = new ArrayList<>();
             for (E entity : entities) {
-                D dto = toDto(entity);
-                dtos.add(dto);
+                dtos.add(toDto(entity));
             }
             return dtos;
         }

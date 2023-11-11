@@ -3,6 +3,7 @@ package com.jobintech.themain5.emagasin.entity;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 @Entity
 public class CommandeItem {
@@ -59,5 +60,18 @@ public class CommandeItem {
 
     public void setPrix(BigDecimal prix) {
         this.prix = prix;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CommandeItem that = (CommandeItem) o;
+        return quantity == that.quantity && Objects.equals(id, that.id) && Objects.equals(prix, that.prix) && Objects.equals(commande, that.commande) && Objects.equals(productId, that.productId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, quantity, prix, commande, productId);
     }
 }

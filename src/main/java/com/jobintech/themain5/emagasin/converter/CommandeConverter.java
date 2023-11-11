@@ -5,12 +5,19 @@ import com.jobintech.themain5.emagasin.entity.Commande;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
+
 @Component
 public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> {
 
     @Autowired
-    private  CommandeItemConverter commandeItemConverter;
+    private CommandeItemConverter commandeItemConverter;
 
+    private Boolean commandeItems;
+
+    public CommandeConverter() {
+        init(true);
+    }
 
     @Override
     public Commande toEntity(CommandeDto dto) {
@@ -22,25 +29,41 @@ public class CommandeConverter extends AbstractConverter<Commande, CommandeDto> 
             commande.setReference(dto.reference());
             commande.setTotalPaye(dto.totalPaye());
             commande.setDateCommande(dto.dateCommande());
-            commande.setCommandeItems(commandeItemConverter.toEntity(dto.commandeItemDtos()));
-
+            if (this.commandeItems) {
+                commande.setCommandeItems(commandeItemConverter.toEntity(dto.commandeItemDtos()));
+            }
             return commande;
         }
     }
 
     @Override
-   public CommandeDto toDto(Commande entity) {
+    public CommandeDto toDto(Commande entity) {
         if (entity == null) {
             return null;
         } else {
+            commandeItemConverter.init(true);
+            commandeItemConverter.setCommande(false);
             CommandeDto commandeDto = new CommandeDto(
                     entity.getId(),
                     entity.getReference(),
                     entity.getTotalPaye(),
                     entity.getDateCommande(),
-                    commandeItemConverter.toDto(entity.getCommandeItems())
+                    this.commandeItems ? commandeItemConverter.toDto(entity.getCommandeItems()) : Collections.emptyList()
             );
+            commandeItemConverter.setCommande(true);
             return commandeDto;
         }
+    }
+
+    public void init(Boolean value) {
+        commandeItems = value;
+    }
+
+    public Boolean getCommandeItems() {
+        return commandeItems;
+    }
+
+    public void setCommandeItems(Boolean commandeItems) {
+        this.commandeItems = commandeItems;
     }
 }
