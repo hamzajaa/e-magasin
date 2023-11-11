@@ -10,8 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/api/commande-items")
 @Tag(name = "CRUD REST APIs for Commande Item Resource")
@@ -33,25 +31,20 @@ public class CommandItemController {
 
 
     @GetMapping("/")
-    public List<CommandeItem> getAllCommandeItems() {
-        return commandeItemService.getCommandeItem();
+    public List<CommandeItemDto> getAllCommandeItems() {
+        return commandeItemConverter.toDto(commandeItemService.getCommandeItem());
     }
 
     @GetMapping("/id/{id}")
-    public ResponseEntity<CommandeItem> getCommandeItemById(@PathVariable Long id) {
-        Optional<CommandeItem> commandeItem = commandeItemService.findById(id);
-        return commandeItem.map(value -> new ResponseEntity<>(value, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    public CommandeItemDto findById(@PathVariable Long id) {
+        return commandeItemConverter.toDto(commandeItemService.findById(id).get());
     }
 
     @PutMapping("/id/{id}")
-    public ResponseEntity<CommandeItem> updateCommandeItem(@RequestBody CommandeItem updatedCommandeItem, @PathVariable Long id) {
-        CommandeItem updatedItem = commandeItemService.update(updatedCommandeItem, id);
-        if (updatedItem != null) {
-            return new ResponseEntity<>(updatedItem, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+    public CommandeItemDto updateCommandeItem(@RequestBody CommandeItemDto updatedCommandeItemDto, @PathVariable Long id) {
+        CommandeItem commandeItem = commandeItemConverter.toEntity(updatedCommandeItemDto);
+        commandeItem = commandeItemService.update(commandeItem, id);
+        return commandeItemConverter.toDto(commandeItem);
     }
 
     @DeleteMapping("/id/{id}")
