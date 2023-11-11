@@ -40,10 +40,10 @@ public class CommandeController {
         return commandeConverter.toDto(commande);
     }
 
-    @PutMapping("/id/{id}")
-    public CommandeDto update(@RequestBody CommandeDto commandeDto, @PathVariable Long id) {
+    @PutMapping("/")
+    public CommandeDto update(@RequestBody CommandeDto commandeDto) {
         Commande commande = commandeConverter.toEntity(commandeDto);
-        commande = commandeService.update(commande, id);
+        commande = commandeService.update(commande);
         return commandeConverter.toDto(commande);
     }
 

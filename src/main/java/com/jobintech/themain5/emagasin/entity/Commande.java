@@ -19,6 +19,7 @@ public class Commande {
     private BigDecimal totalPaye;
     @CreationTimestamp
     private LocalDateTime dateCommande;
+    private Long clientId;
     @OneToMany(mappedBy = "commande", fetch = FetchType.LAZY)
     private List<CommandeItem> commandItems;
 
@@ -76,5 +77,13 @@ public class Commande {
     @Override
     public int hashCode() {
         return Objects.hash(id, reference, totalPaye, dateCommande, commandItems);
+    }
+
+    public Long getClientId() {
+        return clientId;
+    }
+
+    public void setClientId(Long clientId) {
+        this.clientId = clientId;
     }
 }

@@ -14,8 +14,13 @@ public interface CommandeService {
 
     Commande save(Commande commande);
 
-    Commande update(Commande commande,Long id);
+    Commande update(Commande commande);
 
     int delete(Long id);
+
+    void save(List<Commande> commandes);
+    void update(List<Commande> commandes);
+    void delete(List<Commande> commandes);
+
 
 }
